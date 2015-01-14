@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyHours</string>
+    <string name="enregistrement">Pointages</string>
+    <string name="export">Exporter</string>
+    <string name="conge">Congés</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="action_drop">Tout supprimer</string>
+    <string name="action_add">Ajouter</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_manage">Gestion</string>
+    <string name="title_activity_export">Export de pointages</string>
+    <string name="days">Aucun pointage enregistré.</string>
+
+</resources>

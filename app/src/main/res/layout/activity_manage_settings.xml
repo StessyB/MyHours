@@ -1,0 +1,192 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="fr.brubru.myhours.packView.ManageActivity"
+    android:id="@+id/ui">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Configuration"
+        android:id="@+id/txtConfiguration"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:padding="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="54dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H1Settings"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:onClick="setConfigurationTime"
+        android:text="00:00"
+        android:layout_below="@+id/switchNotif"
+        android:layout_alignLeft="@+id/switchNotif"
+        android:layout_alignStart="@+id/switchNotif" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H1"
+        android:id="@+id/txtH1Settings"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_alignTop="@+id/H1Settings"
+        android:layout_alignLeft="@+id/txtAlert"
+        android:layout_alignStart="@+id/txtAlert" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H2Settings"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:text="00:00"
+        android:onClick="setConfigurationTime"
+        android:layout_below="@+id/H1Settings"
+        android:layout_alignLeft="@+id/H1Settings"
+        android:layout_alignStart="@+id/H1Settings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H2"
+        android:id="@+id/txtH2Settings"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_alignTop="@+id/H2Settings"
+        android:layout_alignLeft="@+id/txtH1Settings"
+        android:layout_alignStart="@+id/txtH1Settings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H3Settings"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:text="00:00"
+        android:onClick="setConfigurationTime"
+        android:layout_below="@+id/H2Settings"
+        android:layout_alignLeft="@+id/H2Settings"
+        android:layout_alignStart="@+id/H2Settings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H4Settings"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:onClick="setConfigurationTime"
+        android:text="00:00"
+        android:layout_below="@+id/H3Settings"
+        android:layout_alignLeft="@+id/H3Settings"
+        android:layout_alignStart="@+id/H3Settings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H3"
+        android:id="@+id/txtH3Settings"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_alignTop="@+id/H3Settings"
+        android:layout_alignLeft="@+id/txtH2Settings"
+        android:layout_alignStart="@+id/txtH2Settings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H4"
+        android:id="@+id/txtH4Settings"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_alignBottom="@+id/H4Settings"
+        android:layout_alignLeft="@+id/txtH3Settings"
+        android:layout_alignStart="@+id/txtH3Settings" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sauvegarder"
+        android:id="@+id/btnSave"
+        android:onClick="changeSettings"
+        android:layout_marginBottom="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/txtH4Settings"
+        android:layout_toEndOf="@+id/txtH4Settings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Alerte"
+        android:id="@+id/txtAlert"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/txtConfiguration"
+        android:layout_alignLeft="@+id/txtConfiguration"
+        android:layout_alignStart="@+id/txtConfiguration"
+        android:layout_margin="0dp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch"
+        android:id="@+id/switchNotif"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:checked="true"
+        android:layout_toRightOf="@+id/btnSave"
+        android:layout_toEndOf="@+id/btnSave"
+        android:layout_alignBottom="@+id/txtAlert"
+        android:layout_below="@+id/txtConfiguration" />
+
+</RelativeLayout>
+
