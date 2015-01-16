@@ -13,18 +13,19 @@ public class Month
     private int numMonth;
     private int year;
     private List<Day> myDays;
+    private List<Week> myWeeks;
 
     public Month(String month, int year, List<Day> days)
     {
         this.myDays = days;
         this.name = month;
         this.year = year;
-        // TODO get numMonth
     }
 
     public Month()
     {
         this.myDays = new ArrayList<>();
+        this.myWeeks = new ArrayList<>();
     }
 
     public long getId()
@@ -70,6 +71,14 @@ public class Month
     public List<Day> getMyDays()
     {
         return myDays;
+    }
+
+    public List<Week> getMyWeeks() {
+        return myWeeks;
+    }
+
+    public void setMyWeeks(List<Week> myWeeks) {
+        this.myWeeks = myWeeks;
     }
 
     public void setMyDays(List<Day> myDays)

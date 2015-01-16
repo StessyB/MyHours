@@ -28,7 +28,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 {
     private Intent myServiceIntent;
     public static MainActivity myActivity;
-    public static String logDir = Environment.getExternalStorageDirectory() + File.separator + "MyHours";
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -53,8 +52,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         mTitle = getString(R.string.enregistrement);
         myActivity = this;
         Variables.context = getApplicationContext();
-        Utils.createDir(logDir);
-        if(!(Thread.getDefaultUncaughtExceptionHandler() instanceof ExceptionHandler)) Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(logDir));
+        Utils.createDir(Variables.logDir);
+        if(!(Thread.getDefaultUncaughtExceptionHandler() instanceof ExceptionHandler)) Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(Variables.logDir));
         Variables.appliStarted = true;
         this.startService();
     }

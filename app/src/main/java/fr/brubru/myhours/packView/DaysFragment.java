@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -19,8 +18,9 @@ import java.util.List;
 import fr.brubru.myhours.R;
 import fr.brubru.myhours.packModel.Day;
 import fr.brubru.myhours.packModel.Month;
-import fr.brubru.myhours.packModel.MyCustomAdapter;
 import fr.brubru.myhours.packModel.MyMonthAdapter;
+import fr.brubru.myhours.packModel.MyMonthAdapterOld;
+import fr.brubru.myhours.packModel.Week;
 import fr.brubru.myhours.packUtils.DataBaseHelper;
 import fr.brubru.myhours.packUtils.Variables;
 
@@ -92,7 +92,7 @@ public class DaysFragment extends Fragment
     public static void clearDays()
     {
         //if(myDaysListView != null) myDaysListView.setAdapter(null);
-        if(myDaysExpandableListView != null) myDaysExpandableListView.setAdapter(new MyMonthAdapter());
+        if(myDaysExpandableListView != null) myDaysExpandableListView.setAdapter(new MyMonthAdapterOld());
     }
 
     public static void listDays()
@@ -103,15 +103,17 @@ public class DaysFragment extends Fragment
         //List<Day> days = db.getList();
         //db.closeDB();
         DataBaseHelper db = new DataBaseHelper(Variables.context, "month");
-        List<Month> months = db.getListPerMonth();
+        List<Month> months = db.getListByMonth();
         db.closeDB();
         //if(days.size() > 0)
+        // TODO SEE http://androidcodesnips.blogspot.fr/2011/09/three-level-expandable-list.html
         if((months != null) && (months.size() > 0))
         {
             //myCustomAdapter = new MyCustomAdapter(days, Variables.context);
             //myDaysListView.setAdapter(myCustomAdapter);
             //myCustomAdapter.notifyDataSetChanged();
 
+            //myMonthAdapter = new MyMonthAdapterOld(months, Variables.context);
             myMonthAdapter = new MyMonthAdapter(months, Variables.context);
             myDaysExpandableListView.setAdapter(myMonthAdapter);
             myMonthAdapter.notifyDataSetChanged();

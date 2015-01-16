@@ -22,6 +22,7 @@ import java.util.Locale;
 
 import fr.brubru.myhours.packModel.Day;
 import fr.brubru.myhours.packModel.Month;
+import fr.brubru.myhours.packModel.Week;
 
 public class DataBaseHelper extends SQLiteOpenHelper
 {
@@ -35,19 +36,27 @@ public class DataBaseHelper extends SQLiteOpenHelper
     private static final String KEY_H2 = "H2";
     private static final String KEY_H3 = "H3";
     private static final String KEY_ID_MONTH = "idMonth";
+    private static final String KEY_ID_WEEK = "idWeek";
     private static final String KEY_H4 = "H4";
     private static final String KEY_NAME = "name";
     private static final String KEY_VALUE = "value";
     private static final String KEY_NUM_MONTH = "numMonth";
     private static final String KEY_YEAR = "year";
+    private static final String KEY_NUMBER = "number";
+    private static final String KEY_NUM_WEEK = "numWeek";
 
     private static final String CREATE_TABLE_MONTH = "CREATE TABLE "
             + "month" + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME
             + " TEXT," + KEY_NUM_MONTH + " INTEGER," + KEY_YEAR + " INTEGER )";
 
+    private static final String CREATE_TABLE_WEEK = "CREATE TABLE "
+            + "week" + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NUMBER
+            + " INTEGER," + KEY_YEAR + " INTEGER, " + KEY_ID_MONTH + " INTEGER )";
+
     private static final String CREATE_TABLE_DAY = "CREATE TABLE "
             + "day" + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_DAY
-            + " TEXT," + KEY_H1 + " TEXT," + KEY_H2 + " TEXT,"  + KEY_H3 + " TEXT," + KEY_H4 + " TEXT, " + KEY_ID_MONTH + " INTEGER )";
+            + " TEXT," + KEY_H1 + " TEXT," + KEY_H2 + " TEXT,"  + KEY_H3 + " TEXT," + KEY_H4 + " TEXT, "
+            + KEY_ID_MONTH + " INTEGER, " + KEY_NUM_WEEK + " INTEGER )";
 
     private static final String CREATE_TABLE_CONFIG = "CREATE TABLE "
             + "config" + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_DAY
@@ -72,6 +81,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             db.execSQL(CREATE_TABLE_CONFIG);
             db.execSQL(CREATE_TABLE_SETTINGS);
             db.execSQL(CREATE_TABLE_MONTH);
+            db.execSQL(CREATE_TABLE_WEEK);
         }
         catch (SQLException ex) { System.out.println("DatabaseHelper onCreate Error : " + ex.getMessage()); }
     }
@@ -154,11 +164,15 @@ public class DataBaseHelper extends SQLiteOpenHelper
         long pid = -1;
         try
         {
-            if(TABLE != "settings")
+            if(TABLE != "config")
             {
                 long idMonth = this.getIdMonthByDay(d.getDay());
                 if(idMonth == -1) idMonth = this.insertMonth(d.getDay());
                 d.setIdMonth(idMonth);
+
+                long idWeek = this.getIdWeekByDay(d.getDay());
+                System.out.println("insertDay " + d.getDay() + " : idWeek --> " + idWeek);
+                if(idWeek == -1) this.insertWeek(d);
             }
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -167,7 +181,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
             values.put(KEY_H2, d.getH2());
             values.put(KEY_H3, d.getH3());
             values.put(KEY_H4, d.getH4());
-            if(TABLE != "settings") values.put(KEY_ID_MONTH, d.getIdMonth());
+            if(TABLE != "config") values.put(KEY_ID_MONTH, d.getIdMonth());
+            if(TABLE != "config") values.put(KEY_NUM_WEEK, d.getNumberWeek());
             pid = db.insert(TABLE, null, values);
             d.setId(pid);
         }
@@ -180,11 +195,14 @@ public class DataBaseHelper extends SQLiteOpenHelper
         long nb = -1;
         try
         {
-            if(TABLE != "settings")
+            if(TABLE != "config")
             {
                 long idMonth = this.getIdMonthByDay(d.getDay());
                 if(idMonth == -1) idMonth = this.insertMonth(d.getDay());
                 d.setIdMonth(idMonth);
+
+                long idWeek = this.getIdWeekByDay(d.getDay());
+                if(idWeek == -1) this.insertWeek(d);
             }
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -193,7 +211,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
             values.put(KEY_H2, d.getH2());
             values.put(KEY_H3, d.getH3());
             values.put(KEY_H4, d.getH4());
-            if(TABLE != "settings") values.put(KEY_ID_MONTH, d.getIdMonth());
+            if(TABLE != "config") values.put(KEY_ID_MONTH, d.getIdMonth());
+            if(TABLE != "config") values.put(KEY_NUM_WEEK, d.getNumberWeek());
             nb = db.update(TABLE, values, KEY_ID + " = " + d.getId(), null);
         }
         catch (SQLException ex) { System.out.println("DatabaseHelper updateDay Error : " + ex.getMessage()); return nb; }
@@ -237,7 +256,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 d.setH2((c.getString(c.getColumnIndex(KEY_H2))));
                 d.setH3((c.getString(c.getColumnIndex(KEY_H3))));
                 d.setH4((c.getString(c.getColumnIndex(KEY_H4))));
-                if(TABLE != "settings") d.setIdMonth(c.getLong(c.getColumnIndex(KEY_ID_MONTH)));
+                if(TABLE != "config") d.setIdMonth(c.getLong(c.getColumnIndex(KEY_ID_MONTH)));
+                if(TABLE != "config") d.setNumberWeek(c.getInt(c.getColumnIndex(KEY_NUM_WEEK)));
             }
             if(c != null) c.close();
             return d;
@@ -267,7 +287,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                     day.setH2((c.getString(c.getColumnIndex(KEY_H2))));
                     day.setH3((c.getString(c.getColumnIndex(KEY_H3))));
                     day.setH4((c.getString(c.getColumnIndex(KEY_H4))));
-                    if(TABLE != "settings") day.setIdMonth(c.getLong(c.getColumnIndex(KEY_ID_MONTH)));
+                    if(TABLE != "config") day.setIdMonth(c.getLong(c.getColumnIndex(KEY_ID_MONTH)));
+                    if(TABLE != "config") day.setNumberWeek(c.getInt(c.getColumnIndex(KEY_NUM_WEEK)));
                     days.add(day);
                     c.moveToNext();
                 }
@@ -277,6 +298,41 @@ public class DataBaseHelper extends SQLiteOpenHelper
             return days;
         }
         catch (SQLException ex) { System.out.println("DatabaseHelper getDaysByPeriod Error : " + ex.getMessage()); return null; }
+    }
+
+    public List<Day> getDaysByNumberWeek(int num)
+    {
+        List<Day> days = new ArrayList<>();
+        try
+        {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String selectQuery = "SELECT  * FROM " + TABLE + " WHERE " + KEY_NUM_WEEK + " = " + num;
+            System.out.println("getDaysByNumberWeek : DEBUG SQL " + selectQuery);
+            Cursor c = db.rawQuery(selectQuery, null);
+            if(c.getCount() >= 1)
+            {
+                c.moveToFirst();
+                while(!c.isAfterLast())
+                {
+                    Day day = new Day();
+                    day.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+                    day.setDay(Utils.Format_US_FR(c.getString(c.getColumnIndex(KEY_DAY))));
+                    day.setH1((c.getString(c.getColumnIndex(KEY_H1))));
+                    day.setH2((c.getString(c.getColumnIndex(KEY_H2))));
+                    day.setH3((c.getString(c.getColumnIndex(KEY_H3))));
+                    day.setH4((c.getString(c.getColumnIndex(KEY_H4))));
+                    if(TABLE != "config") day.setIdMonth(c.getLong(c.getColumnIndex(KEY_ID_MONTH)));
+                    if(TABLE != "config") day.setNumberWeek(c.getInt(c.getColumnIndex(KEY_NUM_WEEK)));
+                    days.add(day);
+                    System.out.println("getDaysByNumberWeek : DEBUG DAY " + day.toString());
+                    c.moveToNext();
+                }
+            }
+            if(c != null) c.close();
+            Collections.sort(days, myDayComparator);
+            return days;
+        }
+        catch (SQLException ex) { System.out.println("DatabaseHelper getDaysByNumberWeek Error : " + ex.getMessage()); return null; }
     }
 
     public List<Day> getListDays()
@@ -300,6 +356,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                     d.setH2(c.getString(c.getColumnIndex(KEY_H2)));
                     d.setH3(c.getString(c.getColumnIndex(KEY_H3)));
                     d.setH4(c.getString(c.getColumnIndex(KEY_H4)));
+                    if(TABLE != "config") d.setNumberWeek(c.getInt(c.getColumnIndex(KEY_NUM_WEEK)));
+                    if(TABLE != "config") d.setIdMonth(c.getLong(c.getColumnIndex(KEY_ID_MONTH)));
                     days.add(d);
                     c.moveToNext();
                 }
@@ -309,6 +367,113 @@ public class DataBaseHelper extends SQLiteOpenHelper
             return days;
         }
         catch (SQLException ex) { System.out.println("DatabaseHelper getList Error : " + ex.getMessage()); return null; }
+    }
+
+    public long insertWeek(Day d)
+    {
+        long pid = -1;
+        try
+        {
+            final String myFormat = "dd/MM/yyyy";
+            final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+            try
+            {
+                Date myDate = sdf.parse(d.getDay());
+                String numWeekString  = new SimpleDateFormat("w").format(myDate);
+                int numWeek = 0;
+                try
+                {
+                    numWeek = Integer.parseInt(numWeekString);
+                }
+                catch(Exception e) { System.out.println("insertWeek parse 1 error " + e.getMessage()); }
+                String year = (String) android.text.format.DateFormat.format("yyyy", myDate); //2015
+                Week w = new Week();
+                w.setNumber(numWeek);
+                w.setYear(Integer.parseInt(year));
+                w.setIdMonth(d.getIdMonth());
+                SQLiteDatabase db = this.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put(KEY_NUMBER, w.getNumber());
+                values.put(KEY_YEAR, w.getYear());
+                values.put(KEY_ID_MONTH, w.getIdMonth());
+                pid = db.insert("week", null, values);
+            }
+            catch (ParseException e) { System.out.println("insertWeek parse 2 error : " + e.getMessage()); }
+        }
+        catch (SQLException ex) { System.out.println("DatabaseHelper insertWeek Error : " + ex.getMessage()); return pid; }
+        return pid;
+    }
+
+    public long getIdWeekByDay(String day)
+    {
+        long idWeek = -1;
+        try
+        {
+            final String myFormat = "dd/MM/yyyy";
+            final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+            try
+            {
+                Date myDate = sdf.parse(day);
+                String year = (String) android.text.format.DateFormat.format("yyyy", myDate); //2015
+                String numWeekString  = new SimpleDateFormat("w").format(myDate);
+                int numWeek = 0;
+                try
+                {
+                    numWeek = Integer.parseInt(numWeekString);
+                }
+                catch(Exception e) { System.out.println("getIdWeekByDay parse 1 error " + e.getMessage()); }
+                SQLiteDatabase db = this.getReadableDatabase();
+                String selectQuery = "SELECT " + KEY_ID + " FROM week WHERE " + KEY_NUMBER + " = " + numWeek + " AND " + KEY_YEAR + " = " + Integer.parseInt(year);
+                System.out.println("getIdWeekByDay : DEBUG SQL " + selectQuery);
+                Cursor c = db.rawQuery(selectQuery, null);
+                if(c.getCount() >= 1)
+                {
+                    c.moveToFirst();
+                    idWeek = c.getInt(c.getColumnIndex(KEY_ID));
+                }
+                if(c != null) c.close();
+                return idWeek;
+            }
+            catch (ParseException e) { System.out.println("getIdWeekByDay parse 2 error : " + e.getMessage()); return idWeek; }
+        }
+        catch (SQLException ex) { System.out.println("DatabaseHelper getIdWeekByDay Error : " + ex.getMessage()); return idWeek; }
+    }
+
+    public List<Week> getWeeksByIdMonth(long id)
+    {
+        List<Week> weeks = new ArrayList<>();
+        Week w;
+        try
+        {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String selectQuery = "SELECT * FROM week WHERE " + KEY_ID_MONTH + " = " + id;
+            System.out.println("getWeeksByIdMonth : DEBUG SQL " + selectQuery);
+            Cursor c = db.rawQuery(selectQuery, null);
+            if(c.getCount() >= 1)
+            {
+                c.moveToFirst();
+                while(!c.isAfterLast())
+                {
+                    w = new Week();
+                    long idWeek = c.getLong(c.getColumnIndex(KEY_ID));
+                    w.setId(idWeek);
+                    int numWeek = c.getInt(c.getColumnIndex(KEY_NUMBER));
+                    w.setNumber(numWeek);
+                    w.setIdMonth(c.getInt(c.getColumnIndex(KEY_ID_MONTH)));
+                    w.setYear(c.getInt(c.getColumnIndex(KEY_YEAR)));
+                    TABLE = "day";
+                    System.out.println("getWeeksByIdMonth : DEBUG Week " + w.toString());
+                    w.setMyDays(this.getDaysByNumberWeek(numWeek));
+                    weeks.add(w);
+                    c.moveToNext();
+                }
+            }
+            if (c != null) c.close();
+            // TODO sort
+            //Collections.sort(months, myMonthComparator);
+            return weeks;
+        }
+        catch (SQLException ex) { System.out.println("DatabaseHelper getWeeksByIdMonth Error : " + ex.getMessage()); return weeks; }
     }
 
     public long insertMonth(String date)
@@ -321,7 +486,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             try
             {
                 Date myDate = sdf.parse(date);
-                String stringMonth = (String) android.text.format.DateFormat.format("MMM", myDate); //Jun
+                String stringMonth = (String) android.text.format.DateFormat.format("MMMM", myDate); //Jun
                 String intMonth = (String) android.text.format.DateFormat.format("MM", myDate); //06
                 String year = (String) android.text.format.DateFormat.format("yyyy", myDate); //2013
                 Month m = new Month();
@@ -337,7 +502,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             }
             catch (ParseException e) { System.out.println("insertMonth parse error : " + e.getMessage()); }
         }
-        catch (SQLException ex) { System.out.println("DatabaseHelper insertDay Error : " + ex.getMessage()); return pid; }
+        catch (SQLException ex) { System.out.println("DatabaseHelper insertMonth Error : " + ex.getMessage()); return pid; }
         return pid;
     }
 
@@ -366,17 +531,17 @@ public class DataBaseHelper extends SQLiteOpenHelper
             }
             catch (ParseException e) { System.out.println("insertMonth parse error : " + e.getMessage()); return idMonth; }
         }
-        catch (SQLException ex) { System.out.println("DatabaseHelper getDayByDay Error : " + ex.getMessage()); return idMonth; }
+        catch (SQLException ex) { System.out.println("DatabaseHelper insertMonth Error : " + ex.getMessage()); return idMonth; }
     }
 
-    public List<Month> getListPerMonth()
+    public List<Month> getListByMonth()
     {
         List<Month> months = new ArrayList<>();
         Month m;
         try
         {
             SQLiteDatabase db = this.getReadableDatabase();
-            String selectQuery = "SELECT  * FROM " + TABLE;
+            String selectQuery = "SELECT  * FROM " + TABLE + " WHERE " + KEY_YEAR + " != 10007";
             Cursor c = db.rawQuery(selectQuery, null);
             if(c.getCount() >= 1)
             {
@@ -384,14 +549,17 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 while(!c.isAfterLast())
                 {
                     m = new Month();
-                    m.setId(c.getLong(c.getColumnIndex(KEY_ID)));
+                    long idMonth = c.getLong(c.getColumnIndex(KEY_ID));
+                    m.setId(idMonth);
                     m.setName(c.getString(c.getColumnIndex(KEY_NAME)));
                     m.setNumMonth(c.getInt(c.getColumnIndex(KEY_NUM_MONTH)));
                     m.setYear(c.getInt(c.getColumnIndex(KEY_YEAR)));
-                    String start = "01/" +  Utils.pad(m.getNumMonth()) + "/" + m.getYear();
-                    String end = "31/" + Utils.pad(m.getNumMonth()) + "/" + m.getYear();
+                    //String start = "01/" +  Utils.pad(m.getNumMonth()) + "/" + m.getYear();
+                    //String end = "31/" + Utils.pad(m.getNumMonth()) + "/" + m.getYear();
                     TABLE = "day";
-                    m.setMyDays(this.getDaysByPeriod(start, end));
+                    // TODO get list week by month
+                    m.setMyWeeks(this.getWeeksByIdMonth(idMonth));
+                    //m.setMyDays(this.getDaysByPeriod(start, end));
                     months.add(m);
                     c.moveToNext();
                 }
@@ -401,7 +569,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             //Collections.sort(months, myMonthComparator);
             return months;
         }
-        catch (SQLException ex) { System.out.println("DatabaseHelper getList Error : " + ex.getMessage()); return null; }
+        catch (SQLException ex) { System.out.println("DatabaseHelper getListByMonth Error : " + ex.getMessage()); return null; }
     }
 
 
@@ -449,6 +617,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
             db.execSQL(CREATE_TABLE_DAY);
             db.execSQL("DROP TABLE IF EXISTS month");
             db.execSQL(CREATE_TABLE_MONTH);
+            db.execSQL("DROP TABLE IF EXISTS week");
+            db.execSQL(CREATE_TABLE_WEEK);
             return true;
         }
         catch (SQLException ex) { System.out.println("DatabaseHelper dropDay Error : " + ex.getMessage()); return false; }

@@ -21,7 +21,9 @@ import fr.brubru.myhours.packModel.CustomTimePickerDialog;
 import fr.brubru.myhours.packModel.Day;
 import fr.brubru.myhours.packService.MyService;
 import fr.brubru.myhours.packUtils.DataBaseHelper;
+import fr.brubru.myhours.packUtils.ExceptionHandler;
 import fr.brubru.myhours.packUtils.Utils;
+import fr.brubru.myhours.packUtils.Variables;
 
 public class ManageActivity extends ActionBarActivity
 {
@@ -42,6 +44,7 @@ public class ManageActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        if(!(Thread.getDefaultUncaughtExceptionHandler() instanceof ExceptionHandler)) Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(Variables.logDir));
         String type = "default";
         Intent intent = getIntent();
         Bundle b = intent.getExtras();

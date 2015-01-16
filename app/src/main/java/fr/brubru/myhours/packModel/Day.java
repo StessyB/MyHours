@@ -10,6 +10,7 @@ import fr.brubru.myhours.packUtils.Utils;
 public class Day
 {
     private long id;
+    private int numberWeek;
     private long idMonth;
     private String day;
     private Date dateDay;
@@ -18,6 +19,8 @@ public class Day
     private String H2;
     private String H3;
     private String H4;
+    private double morningHours;
+    private double afternoonHours;
 
     public Day(String d, String h1, String h2, String h3, String h4)
     {
@@ -29,6 +32,7 @@ public class Day
         this.H4 = h4;
         this.dateDay = Utils.stringToDate(this.day);
         this.dayUS = Utils.Format_FR_US(this.day);
+        this.numberWeek = Utils.getNumberWeek(this.day);
     }
 
     public Day()
@@ -63,6 +67,12 @@ public class Day
         this.day = day;
         this.dateDay = Utils.stringToDate(this.day);
         this.dayUS = Utils.Format_FR_US(this.day);
+        this.numberWeek = Utils.getNumberWeek(this.day);
+    }
+
+    public void setNumberWeek(int numberWeek)
+    {
+        this.numberWeek = numberWeek;
     }
 
     public String getH1()
@@ -125,6 +135,11 @@ public class Day
         this.idMonth = idMonth;
     }
 
+    public int getNumberWeek()
+    {
+        return numberWeek;
+    }
+
     @Override
     public String toString()
     {
@@ -134,5 +149,17 @@ public class Day
     public String getExport()
     {
         return day + " : " + H1 + " " + H2 + " " + H3 + " " + H4;
+    }
+
+    public double getMorningHours()
+    {
+        morningHours = Utils.compareHours(H1, H2);
+        return morningHours;
+    }
+
+    public double getAfternoonHours()
+    {
+        afternoonHours = Utils.compareHours(H3, H4);
+        return afternoonHours;
     }
 }
