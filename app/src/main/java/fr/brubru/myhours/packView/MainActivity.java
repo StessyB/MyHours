@@ -1,24 +1,27 @@
 package fr.brubru.myhours.packView;
 
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.NfcF;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.widget.ListView;
+import android.widget.Toast;
 
-import java.io.File;
-import java.util.List;
+import java.util.Arrays;
 
 import fr.brubru.myhours.R;
-import fr.brubru.myhours.packModel.Day;
-import fr.brubru.myhours.packModel.MyCustomAdapter;
 import fr.brubru.myhours.packService.MyService;
-import fr.brubru.myhours.packUtils.DataBaseHelper;
 import fr.brubru.myhours.packUtils.ExceptionHandler;
 import fr.brubru.myhours.packUtils.Utils;
 import fr.brubru.myhours.packUtils.Variables;
@@ -28,6 +31,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 {
     private Intent myServiceIntent;
     public static MainActivity myActivity;
+    private NfcAdapter mNfcAdapter;
+    private PendingIntent mPendingIntent;
+    private IntentFilter[] mIntentFilters;
+    private String[][] mNFCTechLists;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -38,7 +45,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    //private boolean isDaysDisplayed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         Utils.createDir(Variables.logDir);
         if(!(Thread.getDefaultUncaughtExceptionHandler() instanceof ExceptionHandler)) Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(Variables.logDir));
         Variables.appliStarted = true;
-        this.startService();
+        //this.startService();
     }
 
     @Override
@@ -70,6 +76,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     {
         System.out.println("--- onPause MainActivity ---");
         super.onPause();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        System.out.println("onDestroy MainActivity");
+        super.onDestroy();
+        Variables.appliStarted = false;
     }
 
     @Override
@@ -140,14 +154,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             return true;
         }
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void onDestroy()
-    {
-        System.out.println("onDestroy MainActivity");
-        super.onDestroy();
-        Variables.appliStarted = false;
     }
 
     public static MainActivity getInstance()

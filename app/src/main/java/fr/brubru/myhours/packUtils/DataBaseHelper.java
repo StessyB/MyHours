@@ -171,7 +171,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 d.setIdMonth(idMonth);
 
                 long idWeek = this.getIdWeekByDay(d.getDay());
-                System.out.println("insertDay " + d.getDay() + " : idWeek --> " + idWeek);
                 if(idWeek == -1) this.insertWeek(d);
             }
             SQLiteDatabase db = this.getWritableDatabase();
@@ -273,7 +272,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
             SQLiteDatabase db = this.getReadableDatabase();
             String selectQuery = "SELECT  * FROM " + TABLE +
                     " WHERE " + KEY_DAY + " >= DATE('" + Utils.Format_FR_US(start) + "')" + " AND " + KEY_DAY + " <= DATE('" + Utils.Format_FR_US(end) + "')";
-            System.out.println("SQL " + selectQuery);
             Cursor c = db.rawQuery(selectQuery, null);
             if(c.getCount() >= 1)
             {
@@ -307,7 +305,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
         {
             SQLiteDatabase db = this.getReadableDatabase();
             String selectQuery = "SELECT  * FROM " + TABLE + " WHERE " + KEY_NUM_WEEK + " = " + num;
-            System.out.println("getDaysByNumberWeek : DEBUG SQL " + selectQuery);
             Cursor c = db.rawQuery(selectQuery, null);
             if(c.getCount() >= 1)
             {
@@ -324,7 +321,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
                     if(TABLE != "config") day.setIdMonth(c.getLong(c.getColumnIndex(KEY_ID_MONTH)));
                     if(TABLE != "config") day.setNumberWeek(c.getInt(c.getColumnIndex(KEY_NUM_WEEK)));
                     days.add(day);
-                    System.out.println("getDaysByNumberWeek : DEBUG DAY " + day.toString());
                     c.moveToNext();
                 }
             }
@@ -424,7 +420,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 catch(Exception e) { System.out.println("getIdWeekByDay parse 1 error " + e.getMessage()); }
                 SQLiteDatabase db = this.getReadableDatabase();
                 String selectQuery = "SELECT " + KEY_ID + " FROM week WHERE " + KEY_NUMBER + " = " + numWeek + " AND " + KEY_YEAR + " = " + Integer.parseInt(year);
-                System.out.println("getIdWeekByDay : DEBUG SQL " + selectQuery);
                 Cursor c = db.rawQuery(selectQuery, null);
                 if(c.getCount() >= 1)
                 {
@@ -447,7 +442,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
         {
             SQLiteDatabase db = this.getReadableDatabase();
             String selectQuery = "SELECT * FROM week WHERE " + KEY_ID_MONTH + " = " + id;
-            System.out.println("getWeeksByIdMonth : DEBUG SQL " + selectQuery);
             Cursor c = db.rawQuery(selectQuery, null);
             if(c.getCount() >= 1)
             {
@@ -462,7 +456,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
                     w.setIdMonth(c.getInt(c.getColumnIndex(KEY_ID_MONTH)));
                     w.setYear(c.getInt(c.getColumnIndex(KEY_YEAR)));
                     TABLE = "day";
-                    System.out.println("getWeeksByIdMonth : DEBUG Week " + w.toString());
                     w.setMyDays(this.getDaysByNumberWeek(numWeek));
                     weeks.add(w);
                     c.moveToNext();
@@ -554,12 +547,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                     m.setName(c.getString(c.getColumnIndex(KEY_NAME)));
                     m.setNumMonth(c.getInt(c.getColumnIndex(KEY_NUM_MONTH)));
                     m.setYear(c.getInt(c.getColumnIndex(KEY_YEAR)));
-                    //String start = "01/" +  Utils.pad(m.getNumMonth()) + "/" + m.getYear();
-                    //String end = "31/" + Utils.pad(m.getNumMonth()) + "/" + m.getYear();
                     TABLE = "day";
-                    // TODO get list week by month
                     m.setMyWeeks(this.getWeeksByIdMonth(idMonth));
-                    //m.setMyDays(this.getDaysByPeriod(start, end));
                     months.add(m);
                     c.moveToNext();
                 }
@@ -603,6 +592,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         {
             SQLiteDatabase db = this.getReadableDatabase();
             int nb = db.delete(TABLE, KEY_ID + " = " + id, null);
+            // TODO delete week and month
             return nb == 1;
         }
         catch (SQLException ex) { System.out.println("DatabaseHelper deleteDay Error : " + ex.getMessage()); return false; }

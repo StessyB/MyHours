@@ -6,13 +6,11 @@ import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.graphics.Typeface;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ import fr.brubru.myhours.packView.ManageActivity;
  */
 public class MyWeekAdapter extends BaseExpandableListAdapter
 {
-    private List<Week> myListWeeks = new ArrayList<>();
+    private List<Week> myListWeeks;
     private LayoutInflater myInflater;
     private Context context;
 
@@ -40,7 +38,7 @@ public class MyWeekAdapter extends BaseExpandableListAdapter
 
     public MyWeekAdapter()
     {
-
+        myListWeeks = new ArrayList<>();
     }
 
     @Override
@@ -103,11 +101,6 @@ public class MyWeekAdapter extends BaseExpandableListAdapter
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent)
     {
-       /* if (convertView == null)
-        {
-            convertView = myInflater.inflate(R.layout.item_week, null);
-        }
-        */
         if(convertView == null)
         {
             convertView= myInflater.inflate(R.layout.item_week, null);
@@ -144,14 +137,6 @@ public class MyWeekAdapter extends BaseExpandableListAdapter
                     convertView.getPaddingBottom());
         }
 
-        //return convertView;
-
-        /*
-        if(convertView == null)
-        {
-            convertView = myInflater.inflate(R.layout.item_list_layout, parent, false);
-        }
-        */
         TextView txtListChild = (TextView) convertView.findViewById(R.id.dayTxt);
         txtListChild.setText(myListWeeks.get(groupPosition).getMyDays().get(childPosition).toString());
         ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.removeDay);

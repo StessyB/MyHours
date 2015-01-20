@@ -15,12 +15,13 @@ public class Day
     private String day;
     private Date dateDay;
     private String dayUS;
+    private String dayWeek;
     private String H1;
     private String H2;
     private String H3;
     private String H4;
-    private double morningHours;
-    private double afternoonHours;
+    private Hour morningHours;
+    private Hour afternoonHours;
 
     public Day(String d, String h1, String h2, String h3, String h4)
     {
@@ -30,9 +31,13 @@ public class Day
         this.H2 = h2;
         this.H3 = h3;
         this.H4 = h4;
+        this.morningHours = new Hour();
+        this.afternoonHours = new Hour();
+        this.id = 0;
         this.dateDay = Utils.stringToDate(this.day);
         this.dayUS = Utils.Format_FR_US(this.day);
         this.numberWeek = Utils.getNumberWeek(this.day);
+        this.dayWeek = Utils.getDayWeek(this.day);
     }
 
     public Day()
@@ -43,8 +48,13 @@ public class Day
         this.H2 = "";
         this.H3 = "";
         this.H4 = "";
+        this.morningHours = new Hour();
+        this.afternoonHours = new Hour();
+        this.id = 0;
+        this.numberWeek = 0;
         this.dateDay = new Date();
         this.dayUS = "";
+        this.dayWeek = "";
     }
 
     public long getId()
@@ -68,6 +78,7 @@ public class Day
         this.dateDay = Utils.stringToDate(this.day);
         this.dayUS = Utils.Format_FR_US(this.day);
         this.numberWeek = Utils.getNumberWeek(this.day);
+        this.dayWeek = Utils.getDayWeek(this.day);
     }
 
     public void setNumberWeek(int numberWeek)
@@ -140,26 +151,31 @@ public class Day
         return numberWeek;
     }
 
-    @Override
-    public String toString()
+    public String getDayWeek()
     {
-        return day + "\n" + H1 + " " + H2 + " " + H3 + " " + H4;
+        return dayWeek;
     }
 
-    public String getExport()
-    {
-        return day + " : " + H1 + " " + H2 + " " + H3 + " " + H4;
-    }
-
-    public double getMorningHours()
+    public Hour getMorningHours()
     {
         morningHours = Utils.compareHours(H1, H2);
         return morningHours;
     }
 
-    public double getAfternoonHours()
+    public Hour getAfternoonHours()
     {
         afternoonHours = Utils.compareHours(H3, H4);
         return afternoonHours;
+    }
+
+    @Override
+    public String toString()
+    {
+        return dayWeek + " " + day + "\n" + H1 + " " + H2 + " " + H3 + " " + H4;
+    }
+
+    public String getExport()
+    {
+        return dayWeek + " " + day + " : " + H1 + " " + H2 + " " + H3 + " " + H4;
     }
 }

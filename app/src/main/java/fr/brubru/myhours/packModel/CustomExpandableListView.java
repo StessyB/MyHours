@@ -1,10 +1,7 @@
 package fr.brubru.myhours.packModel;
 
 import android.content.Context;
-import android.widget.AbsListView;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.RelativeLayout;
 
 /**
  * Created by Stessy on 15/01/2015.

@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,19 +25,16 @@ public class MyMonthAdapter extends BaseExpandableListAdapter
     private Context context;
     private CustomExpandableListView elv;
 
-    // TODO SEE http://harrane.blogspot.in/2013/04/three-level-expandablelistview.html#comment-form
-
     public MyMonthAdapter(List<Month> list, Context context)
     {
         this.myListMonth = list;
         this.context = context;
         this.myInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //myInflater = LayoutInflater.from(context);
     }
 
     public MyMonthAdapter()
     {
-
+        myListMonth = new ArrayList<>();
     }
 
     @Override
@@ -51,7 +46,6 @@ public class MyMonthAdapter extends BaseExpandableListAdapter
     @Override
     public int getChildrenCount(int groupPosition)
     {
-        //return myListMonth.get(groupPosition).getMyDays().size();
         return myListMonth.get(groupPosition).getMyWeeks().size();
     }
 
@@ -64,7 +58,6 @@ public class MyMonthAdapter extends BaseExpandableListAdapter
     @Override
     public Week getChild(int groupPosition, int childPosition)
     {
-        //return myListMonth.get(groupPosition).getMyDays().get(childPosition);
         return myListMonth.get(groupPosition).getMyWeeks().get(childPosition);
     }
 
@@ -121,9 +114,6 @@ public class MyMonthAdapter extends BaseExpandableListAdapter
         {
             convertView = myInflater.inflate(R.layout.item_week, parent, false);
         }
-        //TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListWeekHeader);
-        //Week week = myListMonth.get(groupPosition).getMyWeeks().get(childPosition);
-        //txtListChild.setText(week.toString());
         if(myListMonth.get(groupPosition).getMyWeeks().size() > 0)
         {
             if(elv != null) elv.setAdapter(new MyWeekAdapter());
@@ -134,7 +124,6 @@ public class MyMonthAdapter extends BaseExpandableListAdapter
             elv.setPadding(0, 0, 0, 0);
             elv.setGroupIndicator(null);
             myWeekAdapter.notifyDataSetChanged();
-            //((ViewGroup)convertView).addView(elv);
             return elv;
         }
         return convertView;

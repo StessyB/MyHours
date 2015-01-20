@@ -13,5 +13,7 @@
     <string name="title_activity_manage">Gestion</string>
     <string name="title_activity_export">Export de pointages</string>
     <string name="days">Aucun pointage enregistré.</string>
+    <string name="title_activity_nfc">NFCActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

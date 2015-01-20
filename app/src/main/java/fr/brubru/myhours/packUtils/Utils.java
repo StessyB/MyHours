@@ -2,9 +2,11 @@ package fr.brubru.myhours.packUtils;
 
 import java.io.File;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
+import fr.brubru.myhours.packModel.Hour;
 
 /**
  * Created by Stessy on 07/01/2015.
@@ -58,22 +60,21 @@ public class Utils
         catch (ParseException e) { System.out.println("Utils.Format_US_FR error : " + e.getMessage()); return dateFR; }
     }
 
-    public static double compareHours(String H1, String H2)
+    public static Hour compareHours(String H1, String H2)
     {
+        Hour h = new Hour();
         int h1 = Integer.parseInt(H1.split(":")[0]);
         int m1 = Integer.parseInt(H1.split(":")[1]);
         int h2 = Integer.parseInt(H2.split(":")[0]);
-        int m2 = Integer.parseInt(H1.split(":")[1]);
-
-        int mTotal1 = h1 * 60 + m1;
-        int mTotal2 = h2 * 60 + m2;
-
-        int ecart = mTotal1 - mTotal2;
+        int m2 = Integer.parseInt(H2.split(":")[1]);
+        double mTotal1 = h1 * 60 + m1;
+        double mTotal2 = h2 * 60 + m2;
+        int ecart = (int) (mTotal2 - mTotal1);
         int ecartHour = ecart / 60;
         int ecartMinute = ecart % 60;
-        System.out.println(ecartHour + "h" + ecartMinute);
-
-        return ecartHour + ecartMinute;
+        h.hour = ecartHour;
+        h.minute = ecartMinute;
+        return h;
     }
 
     public static int getNumberWeek(String day)
@@ -89,5 +90,17 @@ public class Utils
             return myCalendar.get(Calendar.WEEK_OF_YEAR);
         }
         catch (ParseException e) { System.out.println("Utils.getNumberWeek error : " + e.getMessage()); return 0; }
+    }
+
+    public static String getDayWeek(String day)
+    {
+        final String myFormat = "dd/MM/yyyy";
+        final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        try
+        {
+            Date myDate = sdf.parse(day);
+            return (String) android.text.format.DateFormat.format("E", myDate);
+        }
+        catch (ParseException e) { System.out.println("Utils.getDayWeek parse 2 error : " + e.getMessage()); return null; }
     }
 }

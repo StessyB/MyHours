@@ -16,11 +16,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.brubru.myhours.R;
-import fr.brubru.myhours.packModel.Day;
 import fr.brubru.myhours.packModel.Month;
 import fr.brubru.myhours.packModel.MyMonthAdapter;
-import fr.brubru.myhours.packModel.MyMonthAdapterOld;
-import fr.brubru.myhours.packModel.Week;
 import fr.brubru.myhours.packUtils.DataBaseHelper;
 import fr.brubru.myhours.packUtils.Variables;
 
@@ -34,8 +31,6 @@ public class DaysFragment extends Fragment
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-    //private static MyCustomAdapter myCustomAdapter;
-    //private static ListView myDaysListView;
     private static TextView myTextView;
     private static ExpandableListView myDaysExpandableListView;
     private static MyMonthAdapter myMonthAdapter;
@@ -62,7 +57,6 @@ public class DaysFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        //myDaysListView = (ListView) rootView.findViewById(R.id.listViewDays);
         myDaysExpandableListView = (ExpandableListView) rootView.findViewById(R.id.ExpandableListViewDays);
         myTextView = (TextView) rootView.findViewById(R.id.txtMainFragment);
         myTextView.setVisibility(View.GONE);
@@ -91,29 +85,18 @@ public class DaysFragment extends Fragment
 
     public static void clearDays()
     {
-        //if(myDaysListView != null) myDaysListView.setAdapter(null);
-        if(myDaysExpandableListView != null) myDaysExpandableListView.setAdapter(new MyMonthAdapterOld());
+        if(myDaysExpandableListView != null) myDaysExpandableListView.setAdapter(new MyMonthAdapter());
     }
 
     public static void listDays()
     {
-        // TODO voir par semaine, mois ... avec nombre d'heures
+        // TODO voir par semaine et mois avec le nombre d'heures
         System.out.println("listDays MainActivity");
-        //DataBaseHelper db = new DataBaseHelper(Variables.context, "day");
-        //List<Day> days = db.getList();
-        //db.closeDB();
         DataBaseHelper db = new DataBaseHelper(Variables.context, "month");
         List<Month> months = db.getListByMonth();
         db.closeDB();
-        //if(days.size() > 0)
-        // TODO SEE http://androidcodesnips.blogspot.fr/2011/09/three-level-expandable-list.html
         if((months != null) && (months.size() > 0))
         {
-            //myCustomAdapter = new MyCustomAdapter(days, Variables.context);
-            //myDaysListView.setAdapter(myCustomAdapter);
-            //myCustomAdapter.notifyDataSetChanged();
-
-            //myMonthAdapter = new MyMonthAdapterOld(months, Variables.context);
             myMonthAdapter = new MyMonthAdapter(months, Variables.context);
             myDaysExpandableListView.setAdapter(myMonthAdapter);
             myMonthAdapter.notifyDataSetChanged();
