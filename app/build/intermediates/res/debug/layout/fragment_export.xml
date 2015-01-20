@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/exportFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Export de pointage(s)"
+        android:id="@+id/txtExport"
+        android:padding="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Début"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/txtStartExport"
+        android:layout_below="@+id/txtExport"
+        android:layout_alignLeft="@+id/txtExport"
+        android:layout_alignStart="@+id/txtExport"
+        android:layout_marginTop="73dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fin"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/txtEndExport"
+        android:layout_below="@+id/txtStartExport"
+        android:layout_alignLeft="@+id/txtStartExport"
+        android:layout_alignStart="@+id/txtStartExport" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dd/MM/yyyy"
+        android:id="@+id/startExport"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_alignTop="@+id/txtStartExport"
+        android:layout_alignRight="@+id/txtExport"
+        android:layout_alignEnd="@+id/txtExport" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dd/MM/yyyy"
+        android:id="@+id/endExport"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/startExport"
+        android:layout_alignLeft="@+id/startExport"
+        android:layout_alignStart="@+id/startExport" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exporter"
+        android:id="@+id/btnExport"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="162dp" />
+
+
+</RelativeLayout><!-- From: file:/C:/Users/sbruchhaeuser/AndroidStudioProjects/MyHours/app/src/main/res/layout/fragment_export.xml -->

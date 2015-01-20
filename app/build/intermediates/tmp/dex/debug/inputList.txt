@@ -1,0 +1,5 @@
+C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\classes\debug
+C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-99c1ccd53a7fa88549c32ac544faa9e96cd17557.jar
+C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-1841df7a9f2c341241ecf12d67ebcbd9757b2606.jar
+C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\classes-b6542d5495cd73a24ed2d0778cd031ec457f46f9.jar
+C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\classes-ef43f66a3ca79a1fabb76b91cd5e3a17fce66aaf.jar
