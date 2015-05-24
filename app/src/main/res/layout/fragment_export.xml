@@ -18,13 +18,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Début"
+        android:text="Du mois de"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="10dp"
-        android:id="@+id/txtStartExport"
+        android:id="@+id/txtStartMonthExport"
         android:layout_below="@+id/txtExport"
         android:layout_alignLeft="@+id/txtExport"
         android:layout_alignStart="@+id/txtExport"
@@ -33,53 +33,90 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fin"
+        android:text="MM/yyyy"
+        android:id="@+id/startMonthExport"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="10dp"
-        android:id="@+id/txtEndExport"
-        android:layout_below="@+id/txtStartExport"
-        android:layout_alignLeft="@+id/txtStartExport"
-        android:layout_alignStart="@+id/txtStartExport" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dd/MM/yyyy"
-        android:id="@+id/startExport"
-        android:textSize="25dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="10dp"
-        android:layout_alignTop="@+id/txtStartExport"
+        android:layout_alignTop="@+id/txtStartMonthExport"
         android:layout_alignRight="@+id/txtExport"
         android:layout_alignEnd="@+id/txtExport" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSavePDF"
+        android:minHeight="70dp"
+        android:minWidth="70dp"
+        android:maxHeight="80dp"
+        android:maxWidth="80dp"
+        android:background="@drawable/ic_action_save"
+        android:layout_alignTop="@+id/btnShareExport"
+        android:layout_toEndOf="@+id/btnShareExport" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnShareExport"
+        android:minHeight="70dp"
+        android:minWidth="70dp"
+        android:maxHeight="80dp"
+        android:maxWidth="80dp"
+        android:background="@drawable/ic_action_social_share"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnExport"
+        android:minHeight="70dp"
+        android:minWidth="70dp"
+        android:maxHeight="80dp"
+        android:maxWidth="80dp"
+        android:background="@drawable/ic_action_export"
+        android:layout_alignTop="@+id/btnShareExport"
+        android:layout_toStartOf="@+id/btnShareExport" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dd/MM/yyyy"
-        android:id="@+id/endExport"
+        android:text="au mois de"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
-        android:paddingBottom="10dp"
-        android:layout_below="@+id/startExport"
-        android:layout_alignLeft="@+id/startExport"
-        android:layout_alignStart="@+id/startExport" />
+        android:paddingBottom="15dp"
+        android:id="@+id/txtEndMonthExport"
+        android:layout_below="@+id/txtStartMonthExport"
+        android:layout_alignStart="@+id/txtStartMonthExport" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exporter"
-        android:id="@+id/btnExport"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="162dp" />
+        android:text="MM/yyyy"
+        android:id="@+id/endMonthExport"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="15dp"
+        android:layout_below="@+id/txtStartMonthExport"
+        android:layout_alignEnd="@+id/startMonthExport" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Juste CP/RTT"
+        android:id="@+id/cbExportHolidays"
+        android:textSize="20dp"
+        android:layout_below="@+id/txtEndMonthExport"
+        android:layout_toEndOf="@+id/btnExport"
+        android:checked="false" />
 
 
 </RelativeLayout>

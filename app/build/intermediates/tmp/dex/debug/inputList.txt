@@ -1,5 +1,6 @@
-C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\classes\debug
-C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-99c1ccd53a7fa88549c32ac544faa9e96cd17557.jar
-C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-1841df7a9f2c341241ecf12d67ebcbd9757b2606.jar
-C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\classes-b6542d5495cd73a24ed2d0778cd031ec457f46f9.jar
-C:\Users\sbruchhaeuser\AndroidStudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\classes-ef43f66a3ca79a1fabb76b91cd5e3a17fce66aaf.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\classes\debug
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-ad6517652a5874b81911609fb9c7f89962691b84.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-68fb9eed99859b8c5b34da1ce6649cdb299e15b7.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\classes-0a36fd2d6296abd3a4afa6e4ef42a1fe46f50124.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\classes-e8e5ba5960e931702e5130fe498f58cc1b948fba.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\debug\itextpdf-5.5.4-f3b60b8a576bf8cec5ee258e6313263ad0e0e8e1.jar

@@ -1,0 +1,6 @@
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\classes\release
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\release\support-annotations-21.0.3-ad6517652a5874b81911609fb9c7f89962691b84.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\release\internal_impl-21.0.3-68fb9eed99859b8c5b34da1ce6649cdb299e15b7.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\release\classes-0a36fd2d6296abd3a4afa6e4ef42a1fe46f50124.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\release\classes-e8e5ba5960e931702e5130fe498f58cc1b948fba.jar
+C:\Users\StessyB\AndroidstudioProjects\MyHours\app\build\intermediates\pre-dexed\release\itextpdf-5.5.4-f3b60b8a576bf8cec5ee258e6313263ad0e0e8e1.jar

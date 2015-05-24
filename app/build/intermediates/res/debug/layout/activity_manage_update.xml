@@ -176,13 +176,76 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enregistrer"
         android:id="@+id/btnUpdate"
         android:onClick="updateDay"
-        android:layout_marginBottom="73dp"
-        android:textSize="25dp"
+        android:background="@drawable/ic_action_save"
+        android:maxWidth="80dp"
+        android:minHeight="80dp"
+        android:minWidth="80dp"
+        android:maxHeight="80dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CP"
+        android:id="@+id/cbCP"
+        android:layout_below="@+id/H4Update"
+        android:layout_alignStart="@+id/txtUH4"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_marginRight="10dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RTT"
+        android:id="@+id/cbRTT"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbCP"
+        android:layout_alignStart="@+id/cbCP" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Congé Exceptionnel"
+        android:id="@+id/cbCE"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_alignTop="@+id/cbCP"
+        android:layout_alignStart="@+id/H4Update" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Congé Sans Solde"
+        android:id="@+id/cbCSS"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbCE"
+        android:layout_alignStart="@+id/cbCE" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Férié"
+        android:id="@+id/cbFerie"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbRTT"
+        android:layout_alignStart="@+id/cbRTT" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maladie"
+        android:id="@+id/cbMaladie"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbCSS"
+        android:layout_alignStart="@+id/cbCSS" />
+
 </RelativeLayout>
-<!-- From: file:/C:/Users/sbruchhaeuser/AndroidStudioProjects/MyHours/app/src/main/res/layout/activity_manage_update.xml -->
+<!-- From: file:/C:/Users/StessyB/AndroidstudioProjects/MyHours/app/src/main/res/layout/activity_manage_update.xml -->

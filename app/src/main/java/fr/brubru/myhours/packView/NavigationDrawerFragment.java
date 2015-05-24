@@ -1,6 +1,8 @@
 package fr.brubru.myhours.packView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -23,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import fr.brubru.myhours.R;
+import fr.brubru.myhours.packUtils.Variables;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -101,6 +104,8 @@ public class NavigationDrawerFragment extends Fragment
                 selectItem(position);
             }
         });
+        String conge = getString(R.string.congeCP);
+        if(Variables.myNbHours.equals("37")) conge = getString(R.string.conge);
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
@@ -108,7 +113,8 @@ public class NavigationDrawerFragment extends Fragment
                 new String[]{
                         getString(R.string.enregistrement),
                         getString(R.string.export),
-                        getString(R.string.conge),
+                        conge,
+                        getString(R.string.congePris)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -284,11 +290,18 @@ public class NavigationDrawerFragment extends Fragment
         }
         if(item.getItemId() == R.id.action_drop)
         {
+            showDialog();
+            return true;
+        }
+        /*
+        if(item.getItemId() == R.id.action_see)
+        {
             Intent manage = new Intent(getActivity(), ManageActivity.class);
-            manage.putExtra("MANAGE_TYPE", "drop");
+            manage.putExtra("MANAGE_TYPE", "see");
             startActivity(manage);
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
 
@@ -318,5 +331,36 @@ public class NavigationDrawerFragment extends Fragment
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    private void doDrop()
+    {
+        Intent manage = new Intent(getActivity(), ManageActivity.class);
+        manage.putExtra("MANAGE_TYPE", "drop");
+        startActivity(manage);
+    }
+
+    private void showDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setMessage("Voulez-vous tout supprimer ?");
+        builder.setCancelable(false);
+        builder.setTitle("Confirmation");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setPositiveButton("OUI", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                doDrop();
+            }
+        });
+        builder.setNegativeButton("NON", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 }

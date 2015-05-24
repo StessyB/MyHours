@@ -33,73 +33,85 @@ uses-permission#android.permission.NFC
 ADDED from AndroidManifest.xml:10:5
 	android:name
 		ADDED from AndroidManifest.xml:10:22
+uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
+ADDED from AndroidManifest.xml:11:5
+	android:name
+		ADDED from AndroidManifest.xml:11:22
 application
-ADDED from AndroidManifest.xml:12:5
+ADDED from AndroidManifest.xml:13:5
 MERGED from com.android.support:appcompat-v7:21.0.3:16:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
-		ADDED from AndroidManifest.xml:15:9
-	android:allowBackup
-		ADDED from AndroidManifest.xml:13:9
-	android:icon
-		ADDED from AndroidManifest.xml:14:9
-	android:theme
 		ADDED from AndroidManifest.xml:16:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:14:9
+	android:icon
+		ADDED from AndroidManifest.xml:15:9
+	android:theme
+		ADDED from AndroidManifest.xml:17:9
 activity#fr.brubru.myhours.packView.MainActivity
-ADDED from AndroidManifest.xml:17:9
+ADDED from AndroidManifest.xml:18:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:21:13
 	android:label
+		ADDED from AndroidManifest.xml:22:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:20:13
+	android:name
 		ADDED from AndroidManifest.xml:19:13
-	android:name
-		ADDED from AndroidManifest.xml:18:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:20:13
+ADDED from AndroidManifest.xml:23:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:21:17
+ADDED from AndroidManifest.xml:24:17
 	android:name
-		ADDED from AndroidManifest.xml:21:25
+		ADDED from AndroidManifest.xml:24:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:22:17
+ADDED from AndroidManifest.xml:25:17
 	android:name
-		ADDED from AndroidManifest.xml:22:27
+		ADDED from AndroidManifest.xml:25:27
 service#fr.brubru.myhours.packService.MyService
-ADDED from AndroidManifest.xml:26:9
-	android:name
-		ADDED from AndroidManifest.xml:26:18
-receiver#fr.brubru.myhours.packService.MyBootReceiver
 ADDED from AndroidManifest.xml:29:9
 	android:name
-		ADDED from AndroidManifest.xml:29:19
+		ADDED from AndroidManifest.xml:29:18
+receiver#fr.brubru.myhours.packService.MyBootReceiver
+ADDED from AndroidManifest.xml:32:9
+	android:name
+		ADDED from AndroidManifest.xml:32:19
 intent-filter#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:30:13
+ADDED from AndroidManifest.xml:33:13
 action#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:31:17
+ADDED from AndroidManifest.xml:34:17
 	android:name
-		ADDED from AndroidManifest.xml:31:25
+		ADDED from AndroidManifest.xml:34:25
 activity#fr.brubru.myhours.packView.ManageActivity
-ADDED from AndroidManifest.xml:35:9
-	android:label
-		ADDED from AndroidManifest.xml:37:13
-	android:name
-		ADDED from AndroidManifest.xml:36:13
-activity#fr.brubru.myhours.packView.NFCActivity
-ADDED from AndroidManifest.xml:40:9
-	android:label
-		ADDED from AndroidManifest.xml:43:13
-	android:theme
-		ADDED from AndroidManifest.xml:42:13
-	android:name
+ADDED from AndroidManifest.xml:38:9
+	android:screenOrientation
 		ADDED from AndroidManifest.xml:41:13
+	android:label
+		ADDED from AndroidManifest.xml:42:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:40:13
+	android:name
+		ADDED from AndroidManifest.xml:39:13
+activity#fr.brubru.myhours.packView.NFCActivity
+ADDED from AndroidManifest.xml:45:9
+	android:label
+		ADDED from AndroidManifest.xml:48:13
+	android:theme
+		ADDED from AndroidManifest.xml:47:13
+	android:name
+		ADDED from AndroidManifest.xml:46:13
 intent-filter#android.intent.category.DEFAULT+android.nfc.action.NDEF_DISCOVERED
-ADDED from AndroidManifest.xml:44:13
+ADDED from AndroidManifest.xml:49:13
 action#android.nfc.action.NDEF_DISCOVERED
-ADDED from AndroidManifest.xml:45:17
+ADDED from AndroidManifest.xml:50:17
 	android:name
-		ADDED from AndroidManifest.xml:45:25
+		ADDED from AndroidManifest.xml:50:25
 category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:46:17
+ADDED from AndroidManifest.xml:51:17
 	android:name
-		ADDED from AndroidManifest.xml:46:27
+		ADDED from AndroidManifest.xml:51:27
 data
-ADDED from AndroidManifest.xml:47:17
+ADDED from AndroidManifest.xml:52:17
 	android:mimeType
-		ADDED from AndroidManifest.xml:47:23
+		ADDED from AndroidManifest.xml:52:23

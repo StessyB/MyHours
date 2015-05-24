@@ -18,18 +18,10 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listViewDays"
-        android:visibility="gone"
-        android:layout_gravity="left|top" />
-
-
     <ExpandableListView
         android:id="@+id/ExpandableListViewDays"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 
 </RelativeLayout>
-<!-- From: file:/C:/Users/sbruchhaeuser/AndroidStudioProjects/MyHours/app/src/main/res/layout/fragment_main.xml -->
+<!-- From: file:/C:/Users/StessyB/AndroidstudioProjects/MyHours/app/src/main/res/layout/fragment_main.xml -->

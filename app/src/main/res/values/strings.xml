@@ -4,16 +4,25 @@
     <string name="app_name">MyHours</string>
     <string name="enregistrement">Pointages</string>
     <string name="export">Exporter</string>
-    <string name="conge">Congés</string>
+    <string name="conge">Solde CP/RTT</string>
+    <string name="congeCP">Solde CP</string>
+    <string name="congePris">Congés</string>
+    <string name="exportCP">Juste CP</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="action_drop">Tout supprimer</string>
     <string name="action_add">Ajouter</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_see">Voir avec les règles</string>
+    <string name="action_settings">Mes Horaires</string>
     <string name="title_activity_manage">Gestion</string>
     <string name="title_activity_export">Export de pointages</string>
     <string name="days">Aucun pointage enregistré.</string>
+    <string name="conges">Aucun CP/RTT enregistré.</string>
+    <string name="congesCP">Aucun CP enregistré.</string>
     <string name="title_activity_nfc">NFCActivity</string>
     <string name="hello_world">Hello world!</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

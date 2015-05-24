@@ -2,28 +2,26 @@ package fr.brubru.myhours.packView;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
-import android.nfc.tech.NfcF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
-import fr.brubru.myhours.R;
 import fr.brubru.myhours.packModel.Day;
 import fr.brubru.myhours.packUtils.DataBaseHelper;
 import fr.brubru.myhours.packUtils.Utils;
@@ -36,6 +34,11 @@ public class NFCActivity extends Activity
     private NfcAdapter mNfcAdapter;
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String MIME_TEXT_MYHOURS = "text/myhours";
+    private static String mySound = "sounds_job_done.mp3";
+    private final static int MAX_VOLUME = 100;
+    private static MediaPlayer myMediaPlayer;
+    private static AudioManager mAudioManager;
+    private static int soundVolume;
 
     @Override
     public void onCreate(Bundle savedState)
@@ -45,6 +48,9 @@ public class NFCActivity extends Activity
         this.setVisible(false);
         System.out.println("--- onCreate NFCActivity ---");
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        myMediaPlayer = new MediaPlayer();
+        mAudioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+        soundVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         if(mNfcAdapter == null)
         {
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_SHORT).show();
@@ -91,6 +97,13 @@ public class NFCActivity extends Activity
     public void onDestroy()
     {
         System.out.println("--- onDestroy NFCActivity ---");
+        try
+        {
+            while (myMediaPlayer.isPlaying()) Thread.sleep(100);
+        }
+        catch (InterruptedException e) { System.out.println("NFCActivity makeSound error sleep : " + e.getMessage()); }
+
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, soundVolume, 0);
         super.onDestroy();
     }
 
@@ -108,6 +121,8 @@ public class NFCActivity extends Activity
     private void handleIntent(Intent intent)
     {
         System.out.println("TAG NFC handleIntent START");
+        // Make a sound
+        makeSound();
         String action = intent.getAction();
         if(NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action))
         {
@@ -146,6 +161,26 @@ public class NFCActivity extends Activity
         }
         System.out.println("TAG NFC handleIntent END");
     }
+
+    private void makeSound()
+    {
+        if(myMediaPlayer.isPlaying())
+        {
+            myMediaPlayer.stop();
+            myMediaPlayer.reset();
+        }
+        try
+        {
+            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            AssetFileDescriptor afd = getAssets().openFd(this.mySound);
+            myMediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            afd.close();
+            myMediaPlayer.prepare();
+            myMediaPlayer.start();
+        }
+        catch (IllegalStateException e) { System.out.println("NFCActivity makeSound error 1 : " + e.getMessage()); }
+        catch (IOException e){ System.out.println("NFCActivity makeSound error 2 : " + e.getMessage()); }
+}
 
     private void readTag(Intent intent)
     {
@@ -206,56 +241,107 @@ public class NFCActivity extends Activity
     private void saveToDatabase()
     {
         System.out.println("TAG NFC saveToDatabase START");
-        Calendar myCalendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String currentDayFR = sdf.format(new Date());
-        String currentHour = Utils.pad(myCalendar.get(Calendar.HOUR_OF_DAY)) + ":" + Utils.pad(myCalendar.get(Calendar.MINUTE));
+        Day currentDay = Utils.getCurrentDay();
         long pid = -2;
-        DataBaseHelper db = new DataBaseHelper(getApplicationContext(), "day");
-        boolean exists = db.checkDayExists(currentDayFR);
+        DataBaseHelper dbDay = new DataBaseHelper(getApplicationContext(), "day");
+        boolean exists = dbDay.checkDayExists(currentDay.getDay());
+        boolean isAdded = false;
         if(!exists)
         {
-            // TODO check heure courante la plus proche de celles des horaires enregistrés (paramètres)
-            Day dAdd = new Day(currentDayFR, currentHour, "00:00", "00:00", "00:00");
-            pid = db.insertDay(dAdd);
-            long id = db.getMaxId();
+            Day dAdd = new Day(currentDay.getDay(), currentDay.getH1(), "00:00", "00:00", "00:00");
+            pid = dbDay.insertDay(dAdd);
+            long id = dbDay.getMaxId();
             dAdd.setId(id);
         }
         else
         {
-            // TODO check heure courante la plus proche de celles des horaires enregistrés (paramètres)
             // Mise a jour de la prochaine heure != "00:00"
-            Day day = db.getDayByDay(currentDayFR);
-            if(day.getH2().equals("00:00"))
+            Day day = dbDay.getDayByDay(currentDay.getDay());
+            if((day.getType().equals("Travail")) || ((!day.getType().equals("Travail")) && (day.getTime().equals("après-midi"))))
             {
-                System.out.println("TAG NFC saveToDatabase H2 UPDATE");
-                day.setH2(currentHour);
-                db.updateDay(day);
-                pid = day.getId();
+                if(day.getH1().equals("00:00"))
+                {
+                    System.out.println("TAG NFC saveToDatabase H1 UPDATE");
+                    day.setH1(currentDay.getH1());
+                    pid = dbDay.updateDay(day);
+                    isAdded = true;
+                }
+                else if(day.getH2().equals("00:00"))
+                {
+                    if(day.getH1().equals(currentDay.getH1())) pid = -3;
+                    if(pid != -3)
+                    {
+                        System.out.println("TAG NFC saveToDatabase H2 UPDATE");
+                        day.setH2(currentDay.getH1());
+                        pid = dbDay.updateDay(day);
+                        isAdded = true;
+                    }
+                }
             }
-            else if(day.getH3().equals("00:00"))
+            if(((day.getType().equals("Travail")) && (!isAdded)) || ((!day.getType().equals("Travail")) && (day.getTime().equals("matin"))))
             {
-                System.out.println("TAG NFC saveToDatabase H3 UPDATE");
-                day.setH3(currentHour);
-                db.updateDay(day);
-                pid = day.getId();
-            }
-            else if(day.getH4().equals("00:00"))
-            {
-                System.out.println("TAG NFC saveToDatabase H4 UPDATE");
-                day.setH4(currentHour);
-                db.updateDay(day);
-                pid = day.getId();
+                if(day.getH3().equals("00:00"))
+                {
+                    if(day.getH2().equals(currentDay.getH1())) pid = -3;
+                    if(pid != -3)
+                    {
+                        System.out.println("TAG NFC saveToDatabase H3 UPDATE");
+                        day.setH3(currentDay.getH1());
+                        dbDay.updateDay(day);
+                        pid = day.getId();
+                    }
+                    // Verifier qu'il y a une heure entre H2 et H3 si activer
+                    /*
+                    if(Variables.isLaunchAutoSet)
+                    {
+                        int launchMinutes = 60;
+                        int minute = Utils.compareTime(day.getH2(), day.getH3());
+                        DataBaseHelper dbSettings = new DataBaseHelper(getApplicationContext(), "settings");
+                        Variables.myLaunchMinutes = dbSettings.getSetting("launchMinutes");
+                        dbSettings.close();
+                        if(Variables.myLaunchMinutes != null) launchMinutes = Integer.parseInt(Variables.myLaunchMinutes);
+                        else Variables.myLaunchMinutes = "60";
+                        if((minute < launchMinutes) && (minute > 0))
+                        {
+                            System.out.println("TAG NFC saveToDatabase H2 UPDATE & H3 UPDATE");
+                            // setH3 = H2 + launchMinutes
+                            Hour h = Utils.addMinute(day.getH3(), launchMinutes-minute);
+                            day.setH3(Utils.pad(h.hour) + ":" + Utils.pad(h.minute));
+                            System.out.println("day " + day);
+                            dbDay = new DataBaseHelper(getApplicationContext(), "day");
+                            dbDay.updateDay(day);
+                            pid = day.getId();
+                        }
+                    } */
+                }
+                else if(day.getH4().equals("00:00"))
+                {
+                    if(day.getH3().equals(currentDay.getH1())) pid = -3;
+                    if(pid != -3)
+                    {
+                        System.out.println("TAG NFC saveToDatabase H4 UPDATE");
+                        day.setH4(currentDay.getH1());
+                        dbDay.updateDay(day);
+                        pid = day.getId();
+                    }
+                }
             }
         }
-        db.closeDB();
+        dbDay.closeDB();
         if(pid > -1)
         {
             Toast.makeText(NFCActivity.getInstance(), "Le pointage a bien été enregistré.", Toast.LENGTH_SHORT).show();
+            if(MainActivity.getInstance() != null)
+            {
+                if(exists) DaysFragment.updateDays("add");
+                else DaysFragment.updateDays("update");
+            }
         }
         else
         {
-            if(exists)
+            if(pid == -3)
+                Toast.makeText(NFCActivity.getInstance(), "La pointage a déjà été renseigné pour cet horaire.", Toast.LENGTH_SHORT).show();
+            else if(exists)
                 Toast.makeText(NFCActivity.getInstance(), "La pointage a déjà été renseigné pour ce jour.", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(NFCActivity.getInstance(), "L'ajout a rencontré un problème.", Toast.LENGTH_SHORT).show();
@@ -291,10 +377,7 @@ public class NFCActivity extends Activity
                     {
                         return readText(ndefRecord);
                     }
-                    catch (UnsupportedEncodingException e)
-                    {
-                        System.out.println("Unsupported Encoding : " + e);
-                    }
+                    catch (UnsupportedEncodingException e) { System.out.println("Unsupported Encoding : " + e); }
                 }
             }
             return null;

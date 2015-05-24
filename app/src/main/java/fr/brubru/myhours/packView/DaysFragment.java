@@ -17,7 +17,7 @@ import java.util.List;
 
 import fr.brubru.myhours.R;
 import fr.brubru.myhours.packModel.Month;
-import fr.brubru.myhours.packModel.MyMonthAdapter;
+import fr.brubru.myhours.packModel.MonthAdapter;
 import fr.brubru.myhours.packUtils.DataBaseHelper;
 import fr.brubru.myhours.packUtils.Variables;
 
@@ -33,7 +33,7 @@ public class DaysFragment extends Fragment
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static TextView myTextView;
     private static ExpandableListView myDaysExpandableListView;
-    private static MyMonthAdapter myMonthAdapter;
+    private static MonthAdapter myMonthAdapter;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -60,7 +60,7 @@ public class DaysFragment extends Fragment
         myDaysExpandableListView = (ExpandableListView) rootView.findViewById(R.id.ExpandableListViewDays);
         myTextView = (TextView) rootView.findViewById(R.id.txtMainFragment);
         myTextView.setVisibility(View.GONE);
-        displayDays();
+        listDays();
         return rootView;
     }
 
@@ -71,37 +71,62 @@ public class DaysFragment extends Fragment
         ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
     }
 
-    public static void getUpdate()
+    public static void seeList()
     {
-        myTextView.setVisibility(View.GONE);
-        displayDays();
+        Variables.isSee = true;
+        System.out.println("seeList MainActivity");
     }
 
-    public static void displayDays()
+    public static void updateDays(String type)
     {
-        clearDays();
-        listDays();
-    }
+        if(MainActivity.getInstance() != null)
+        {
+            DataBaseHelper db = new DataBaseHelper(Variables.context, "month");
+            List<Month> myMonths = db.getListByMonth();
+            db.closeDB();
+            myTextView.setVisibility(View.VISIBLE);
+            if((myMonths != null) && (myMonths.size() > 0)) myTextView.setVisibility(View.GONE);
+            if((type.equals("add")) || (type.equals("drop")) || (type.equals("see")))
+            {
+                if(myMonthAdapter != null) myMonthAdapter.setMyListMonth(myMonths);
+            }
+            else
+            {
+                // update ou delete
+                // TODO refresh sans recharger la vue
+                if(myMonthAdapter != null) myMonthAdapter.setMyListMonth(myMonths);
+            }
 
-    public static void clearDays()
-    {
-        if(myDaysExpandableListView != null) myDaysExpandableListView.setAdapter(new MyMonthAdapter());
+            if(type.equals("update"))
+            {
+                //if(myMonthAdapter != null) myMonthAdapter.notifyWeekAdapter(myMonths);
+            }
+            if(type.equals("delete"))
+            {
+                //if(myMonthAdapter != null) myMonthAdapter.notifyWeekAdapter(myMonths);
+            }
+        }
     }
 
     public static void listDays()
     {
-        // TODO voir par semaine et mois avec le nombre d'heures
         System.out.println("listDays MainActivity");
         DataBaseHelper db = new DataBaseHelper(Variables.context, "month");
-        List<Month> months = db.getListByMonth();
+        List<Month> myMonths = db.getListByMonth();
         db.closeDB();
-        if((months != null) && (months.size() > 0))
+        if((myMonths != null) && (myMonths.size() > 0))
         {
-            myMonthAdapter = new MyMonthAdapter(months, Variables.context);
+            myTextView.setVisibility(View.GONE);
+            myMonthAdapter = new MonthAdapter(myMonths, Variables.context);
             myDaysExpandableListView.setAdapter(myMonthAdapter);
             myMonthAdapter.notifyDataSetChanged();
         }
         else
+        {
+            myMonthAdapter = new MonthAdapter(myMonths, Variables.context);
+            myDaysExpandableListView.setAdapter(myMonthAdapter);
+            myMonthAdapter.notifyDataSetChanged();
             myTextView.setVisibility(View.VISIBLE);
+        }
     }
 }

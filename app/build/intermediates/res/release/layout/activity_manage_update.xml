@@ -1,0 +1,251 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="fr.brubru.myhours.packView.ManageActivity"
+    android:id="@+id/manage_add">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edition du pointage"
+        android:id="@+id/txtUPointage"
+        android:padding="0dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:id="@+id/DayUpdate"
+        android:layout_marginTop="54dp"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:text="dd/MM/yyyy"
+        android:layout_below="@+id/txtUPointage"
+        android:layout_alignRight="@+id/txtUPointage"
+        android:layout_alignEnd="@+id/txtUPointage" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:id="@+id/H1Update"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:onClick="setUpdateTime"
+        android:text="00:00"
+        android:textSize="25dp"
+        android:layout_above="@+id/H2Update"
+        android:layout_alignRight="@+id/btnUpdate"
+        android:layout_alignEnd="@+id/btnUpdate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Jour"
+        android:id="@+id/txtUDay"
+        android:textSize="25dp"
+        android:layout_alignBottom="@+id/DayUpdate"
+        android:layout_alignLeft="@+id/txtUPointage"
+        android:layout_alignStart="@+id/txtUPointage"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H1"
+        android:id="@+id/txtUH1"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/txtUDay"
+        android:layout_alignLeft="@+id/txtUDay"
+        android:layout_alignStart="@+id/txtUDay" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:id="@+id/H2Update"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:text="00:00"
+        android:textSize="25dp"
+        android:onClick="setUpdateTime"
+        android:layout_alignTop="@+id/txtUH2"
+        android:layout_alignLeft="@+id/H1Update"
+        android:layout_alignStart="@+id/H1Update" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H2"
+        android:id="@+id/txtUH2"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/txtUH1"
+        android:layout_alignLeft="@+id/txtUH1"
+        android:layout_alignStart="@+id/txtUH1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H3Update"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:text="00:00"
+        android:onClick="setUpdateTime"
+        android:layout_below="@+id/H2Update"
+        android:layout_alignLeft="@+id/H2Update"
+        android:layout_alignStart="@+id/H2Update" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H4Update"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:onClick="setUpdateTime"
+        android:text="00:00"
+        android:layout_below="@+id/H3Update"
+        android:layout_alignLeft="@+id/H3Update"
+        android:layout_alignStart="@+id/H3Update" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H3"
+        android:id="@+id/txtUH3"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/txtUH2"
+        android:layout_alignLeft="@+id/txtUH2"
+        android:layout_alignStart="@+id/txtUH2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="H4"
+        android:id="@+id/txtUH4"
+        android:textSize="25dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="10dp"
+        android:layout_alignBottom="@+id/H4Update"
+        android:layout_alignLeft="@+id/txtUH3"
+        android:layout_alignStart="@+id/txtUH3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUpdate"
+        android:onClick="updateDay"
+        android:background="@drawable/ic_action_save"
+        android:maxWidth="80dp"
+        android:minHeight="80dp"
+        android:minWidth="80dp"
+        android:maxHeight="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CP"
+        android:id="@+id/cbCP"
+        android:layout_below="@+id/H4Update"
+        android:layout_alignStart="@+id/txtUH4"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_marginRight="10dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RTT"
+        android:id="@+id/cbRTT"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbCP"
+        android:layout_alignStart="@+id/cbCP" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Congé Exeptionnel"
+        android:id="@+id/cbCE"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_alignTop="@+id/cbCP"
+        android:layout_alignStart="@+id/H4Update" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Absence"
+        android:id="@+id/cbAbsent"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbCE"
+        android:layout_alignStart="@+id/cbCE" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Férié"
+        android:id="@+id/cbFerie"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbRTT"
+        android:layout_alignStart="@+id/cbRTT" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maladie"
+        android:id="@+id/cbMaladie"
+        android:checked="false"
+        android:onClick="typeDayClicked"
+        android:layout_below="@+id/cbAbsent"
+        android:layout_alignStart="@+id/cbAbsent" />
+
+</RelativeLayout>
+<!-- From: file:/C:/Users/StessyB/AndroidstudioProjects/MyHours/app/src/main/res/layout/activity_manage_update.xml -->

@@ -10,8 +10,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Configuration"
-        android:id="@+id/txtConfiguration"
+        android:text="Mes Horaires"
+        android:id="@+id/txtSettings"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
@@ -27,167 +27,480 @@
         android:layout_height="wrap_content"
         android:inputType="time"
         android:textSize="25dp"
-        android:id="@+id/H1Settings"
+        android:id="@+id/H4Monday"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="10dp"
-        android:onClick="setConfigurationTime"
+        android:onClick="setTimeMonday"
         android:text="00:00"
-        android:layout_below="@+id/switchNotif"
-        android:layout_alignLeft="@+id/switchNotif"
-        android:layout_alignStart="@+id/switchNotif" />
+        android:layout_below="@+id/txtSettings"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="H1"
-        android:id="@+id/txtH1Settings"
+        android:text="Lun"
+        android:id="@+id/txtMonday"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
-        android:paddingRight="0dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_alignTop="@+id/H1Settings"
-        android:layout_alignLeft="@+id/txtAlert"
-        android:layout_alignStart="@+id/txtAlert" />
+        android:layout_below="@+id/txtSettings"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:textSize="25dp"
-        android:id="@+id/H2Settings"
+        android:id="@+id/H4Tuesday"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="10dp"
         android:text="00:00"
-        android:onClick="setConfigurationTime"
-        android:layout_below="@+id/H1Settings"
-        android:layout_alignLeft="@+id/H1Settings"
-        android:layout_alignStart="@+id/H1Settings" />
+        android:onClick="setTimeTuesday"
+        android:layout_below="@+id/H4Monday"
+        android:layout_alignLeft="@+id/H4Monday"
+        android:layout_alignStart="@+id/H4Monday" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="H2"
-        android:id="@+id/txtH2Settings"
+        android:text="Mar"
+        android:id="@+id/txtTuesday"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
-        android:paddingRight="0dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_alignTop="@+id/H2Settings"
-        android:layout_alignLeft="@+id/txtH1Settings"
-        android:layout_alignStart="@+id/txtH1Settings" />
+        android:layout_alignTop="@+id/H4Tuesday"
+        android:layout_alignLeft="@+id/txtMonday"
+        android:layout_alignStart="@+id/txtMonday" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:textSize="25dp"
-        android:id="@+id/H3Settings"
+        android:id="@+id/H4Wednesday"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="10dp"
         android:text="00:00"
-        android:onClick="setConfigurationTime"
-        android:layout_below="@+id/H2Settings"
-        android:layout_alignLeft="@+id/H2Settings"
-        android:layout_alignStart="@+id/H2Settings" />
+        android:onClick="setTimeWednesday"
+        android:layout_below="@+id/H4Tuesday"
+        android:layout_alignLeft="@+id/H4Tuesday"
+        android:layout_alignStart="@+id/H4Tuesday" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:textSize="25dp"
-        android:id="@+id/H4Settings"
+        android:id="@+id/H4Thursday"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="10dp"
-        android:onClick="setConfigurationTime"
+        android:onClick="setTimeThursday"
         android:text="00:00"
-        android:layout_below="@+id/H3Settings"
-        android:layout_alignLeft="@+id/H3Settings"
-        android:layout_alignStart="@+id/H3Settings" />
+        android:layout_below="@+id/H4Wednesday"
+        android:layout_alignLeft="@+id/H4Wednesday"
+        android:layout_alignStart="@+id/H4Wednesday" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="H3"
-        android:id="@+id/txtH3Settings"
+        android:text="Mer"
+        android:id="@+id/txtWednesday"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
-        android:paddingRight="0dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_alignTop="@+id/H3Settings"
-        android:layout_alignLeft="@+id/txtH2Settings"
-        android:layout_alignStart="@+id/txtH2Settings" />
+        android:layout_alignTop="@+id/H4Wednesday"
+        android:layout_alignLeft="@+id/txtTuesday"
+        android:layout_alignStart="@+id/txtTuesday" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="H4"
-        android:id="@+id/txtH4Settings"
+        android:text="Jeu"
+        android:id="@+id/txtThursday"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
-        android:paddingRight="0dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_alignBottom="@+id/H4Settings"
-        android:layout_alignLeft="@+id/txtH3Settings"
-        android:layout_alignStart="@+id/txtH3Settings" />
+        android:layout_alignBottom="@+id/H4Thursday"
+        android:layout_alignLeft="@+id/txtWednesday"
+        android:layout_alignStart="@+id/txtWednesday" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sauvegarder"
         android:id="@+id/btnSave"
+        android:maxWidth="80dp"
+        android:minHeight="80dp"
+        android:minWidth="80dp"
+        android:maxHeight="80dp"
+        android:background="@drawable/ic_action_valid"
         android:onClick="changeSettings"
-        android:layout_marginBottom="52dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/txtH4Settings"
-        android:layout_toEndOf="@+id/txtH4Settings" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Alerte"
-        android:id="@+id/txtAlert"
+        android:text="Ven"
+        android:id="@+id/txtFriday"
         android:textSize="25dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
-        android:paddingRight="0dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_below="@+id/txtConfiguration"
-        android:layout_alignLeft="@+id/txtConfiguration"
-        android:layout_alignStart="@+id/txtConfiguration"
-        android:layout_margin="0dp" />
+        android:layout_below="@+id/txtThursday"
+        android:layout_alignParentStart="true" />
 
-    <Switch
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch"
-        android:id="@+id/switchNotif"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H1Monday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeMonday"
+        android:text="00:00"
+        android:layout_alignTop="@+id/txtMonday"
+        android:layout_toEndOf="@+id/txtMonday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H2Monday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeMonday"
+        android:text="00:00"
+        android:layout_above="@+id/txtTuesday"
+        android:layout_toEndOf="@+id/H1Monday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H3Monday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeMonday"
+        android:text="00:00"
+        android:layout_below="@+id/txtSettings"
+        android:layout_toStartOf="@+id/H4Monday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H1Tuesday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeTuesday"
+        android:text="00:00"
+        android:layout_alignTop="@+id/txtTuesday"
+        android:layout_alignStart="@+id/H1Monday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H2Tuesday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeTuesday"
+        android:text="00:00"
+        android:layout_below="@+id/H2Monday"
+        android:layout_alignStart="@+id/H2Monday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H3Tuesday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeTuesday"
+        android:text="00:00"
+        android:layout_below="@+id/H4Monday"
+        android:layout_alignStart="@+id/H3Monday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H1Wednesday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeWednesday"
+        android:text="00:00"
+        android:layout_below="@+id/H1Tuesday"
+        android:layout_alignStart="@+id/H1Tuesday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H1Thursday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeThursday"
+        android:text="00:00"
+        android:layout_alignBottom="@+id/txtThursday"
+        android:layout_toEndOf="@+id/txtMonday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H1Friday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeFriday"
+        android:text="00:00"
+        android:layout_below="@+id/H1Thursday"
+        android:layout_toStartOf="@+id/H2Friday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H2Wednesday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeWednesday"
+        android:text="00:00"
+        android:layout_below="@+id/H2Tuesday"
+        android:layout_alignStart="@+id/H2Tuesday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H2Thursday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeThursday"
+        android:text="00:00"
+        android:layout_below="@+id/H1Wednesday"
+        android:layout_toEndOf="@+id/H1Wednesday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H2Friday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeFriday"
+        android:text="00:00"
+        android:layout_below="@+id/H2Thursday"
+        android:layout_toEndOf="@+id/H1Thursday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H3Wednesday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeWednesday"
+        android:text="00:00"
+        android:layout_below="@+id/H4Tuesday"
+        android:layout_alignStart="@+id/H3Tuesday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H3Thursday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeThursday"
+        android:text="00:00"
+        android:layout_below="@+id/H3Wednesday"
+        android:layout_alignStart="@+id/H3Wednesday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H3Friday"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="setTimeFriday"
+        android:text="00:00"
+        android:layout_below="@+id/H2Thursday"
+        android:layout_alignStart="@+id/H3Thursday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:textSize="25dp"
+        android:id="@+id/H4Friday"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="10dp"
-        android:checked="true"
-        android:layout_toRightOf="@+id/btnSave"
-        android:layout_toEndOf="@+id/btnSave"
-        android:layout_alignBottom="@+id/txtAlert"
-        android:layout_below="@+id/txtConfiguration" />
+        android:onClick="setTimeFriday"
+        android:text="00:00"
+        android:layout_below="@+id/H3Thursday"
+        android:layout_alignParentEnd="true" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Midi (mn)"
+        android:id="@+id/launchAutoSet"
+        android:textSize="25dp"
+        android:checked="false"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/txtFriday"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60"
+        android:id="@+id/launchMinutes"
+        android:inputType="numberSigned"
+        android:textSize="25dp"
+        android:layout_alignTop="@+id/launchAutoSet"
+        android:layout_toStartOf="@+id/H3Friday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nb heures"
+        android:id="@+id/txtNbHours"
+        android:textSize="25dp"
+        android:paddingTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/launchMinutes"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/nbHours"
+        android:textSize="25dp"
+        android:text="37"
+        android:layout_alignTop="@+id/txtNbHours"
+        android:layout_alignStart="@+id/launchMinutes"
+        android:layout_alignEnd="@+id/launchMinutes" />
+
+    <!--
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pause 1"
+        android:textSize="25dp"
+        android:id="@+id/pause1AutoSet"
+        android:checked="false"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:layout_below="@+id/launchAutoSet"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pause 2"
+        android:id="@+id/pause2AutoSet"
+        android:textSize="25dp"
+        android:checked="false"
+        android:layout_below="@+id/pause1AutoSet"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:text="10"
+        android:id="@+id/pause1Minutes"
+        android:layout_below="@+id/launchAutoSet"
+        android:layout_alignStart="@+id/launchMinutes"
+        android:layout_alignEnd="@+id/launchMinutes"
+        android:textSize="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:id="@+id/pause2Minutes"
+        android:layout_alignTop="@+id/pause2AutoSet"
+        android:layout_alignStart="@+id/pause1Minutes"
+        android:layout_alignEnd="@+id/H2Friday"
+        android:textSize="25dp"
+        android:text="10" />
+    -->
 </RelativeLayout>
 
-<!-- From: file:/C:/Users/sbruchhaeuser/AndroidStudioProjects/MyHours/app/src/main/res/layout/activity_manage_settings.xml -->
+<!-- From: file:/C:/Users/StessyB/AndroidstudioProjects/MyHours/app/src/main/res/layout/activity_manage_settings.xml -->
